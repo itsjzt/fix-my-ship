@@ -1,11 +1,11 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var TwitterStrategy = require('passport-twitter').Strategy;
-var GithubStrategy = require('passport-github').Strategy;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
+const GithubStrategy = require('passport-github').Strategy;
 
-var User = require('../models/User');
+const User = require('../models/User');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -96,7 +96,7 @@ passport.use(
               });
               done(err);
             } else {
-              var newUser = new User({
+              const newUser = new User({
                 name: profile.name.givenName + ' ' + profile.name.familyName,
                 email: profile._json.email,
                 gender: profile._json.gender,
@@ -162,7 +162,7 @@ passport.use(
               });
               done(err);
             } else {
-              var newUser = new User({
+              const newUser = new User({
                 name: profile.displayName,
                 email: profile.emails[0].value,
                 gender: profile._json.gender,
@@ -225,7 +225,7 @@ passport.use(
           // Ideally, it should be changed by a user to their real email address afterwards.
           // For example, after login, check if email contains @twitter.com, then redirect to My Account page,
           // and restrict user's page navigation until they update their email address.
-          var newUser = new User({
+          const newUser = new User({
             name: profile.displayName,
             email: profile.username + '@twitter.com',
             location: profile._json.location,
@@ -284,7 +284,7 @@ passport.use(
               });
               done(err);
             } else {
-              var newUser = new User({
+              const newUser = new User({
                 name: profile.displayName,
                 email: profile._json.email,
                 location: profile._json.location,

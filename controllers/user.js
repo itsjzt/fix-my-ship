@@ -1,8 +1,8 @@
-var async = require('async');
-var crypto = require('crypto');
-var nodemailer = require('nodemailer');
-var passport = require('passport');
-var User = require('../models/User');
+const async = require('async');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const passport = require('passport');
+const User = require('../models/User');
 
 /**
  * Login required middleware
@@ -36,7 +36,7 @@ exports.loginPost = function(req, res, next) {
   req.assert('password', 'Password cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     req.flash('error', errors);
@@ -84,7 +84,7 @@ exports.signupPost = function(req, res, next) {
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     req.flash('error', errors);
@@ -137,7 +137,7 @@ exports.accountPut = function(req, res, next) {
     req.sanitize('email').normalizeEmail({ remove_dots: false });
   }
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     req.flash('error', errors);
@@ -235,7 +235,7 @@ exports.forgotPost = function(req, res, next) {
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     req.flash('error', errors);
@@ -245,7 +245,7 @@ exports.forgotPost = function(req, res, next) {
   async.waterfall([
     function(done) {
       crypto.randomBytes(16, function(err, buf) {
-        var token = buf.toString('hex');
+        const token = buf.toString('hex');
         done(err, token);
       });
     },
@@ -268,14 +268,14 @@ exports.forgotPost = function(req, res, next) {
       });
     },
     function(token, user, done) {
-      var transporter = nodemailer.createTransport({
+      const transporter = nodemailer.createTransport({
         service: 'Mailgun',
         auth: {
           user: process.env.MAILGUN_USERNAME,
           pass: process.env.MAILGUN_PASSWORD
         }
       });
-      var mailOptions = {
+      const mailOptions = {
         to: user.email,
         from: 'support@yourdomain.com',
         subject: '✔ Reset your password on Mega Boilerplate',
@@ -332,7 +332,7 @@ exports.resetPost = function(req, res, next) {
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirm', 'Passwords must match').equals(req.body.password);
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     req.flash('error', errors);
@@ -362,14 +362,14 @@ exports.resetPost = function(req, res, next) {
         });
     },
     function(user, done) {
-      var transporter = nodemailer.createTransport({
+      const transporter = nodemailer.createTransport({
         service: 'Mailgun',
         auth: {
           user: process.env.MAILGUN_USERNAME,
           pass: process.env.MAILGUN_PASSWORD
         }
       });
-      var mailOptions = {
+      const mailOptions = {
         from: 'support@yourdomain.com',
         to: user.email,
         subject: 'Your Mega Boilerplate password has been changed',

@@ -1,5 +1,5 @@
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
   service: 'Mailgun',
   auth: {
     user: process.env.MAILGUN_USERNAME,
@@ -26,14 +26,14 @@ exports.contactPost = function(req, res) {
   req.assert('message', 'Message cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     req.flash('error', errors);
     return res.redirect('/contact');
   }
 
-  var mailOptions = {
+  const mailOptions = {
     from: req.body.name + ' ' + '<' + req.body.email + '>',
     to: 'your@email.com',
     subject: '✔ Contact Form | Mega Boilerplate',

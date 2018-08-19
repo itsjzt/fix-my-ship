@@ -1,15 +1,15 @@
-var crypto = require('crypto');
-var bcrypt = require('bcrypt-nodejs');
-var mongoose = require('mongoose');
+const crypto = require('crypto');
+const bcrypt = require('bcrypt-nodejs');
+const mongoose = require('mongoose');
 
-var schemaOptions = {
+const schemaOptions = {
   timestamps: true,
   toJSON: {
     virtuals: true
   }
 };
 
-var userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: String,
     email: { type: String, unique: true },
@@ -30,7 +30,7 @@ var userSchema = new mongoose.Schema(
 );
 
 userSchema.pre('save', function(next) {
-  var user = this;
+  const user = this;
   if (!user.isModified('password')) {
     return next();
   }
@@ -52,7 +52,7 @@ userSchema.virtual('gravatar').get(function() {
   if (!this.get('email')) {
     return 'https://gravatar.com/avatar/?s=200&d=retro';
   }
-  var md5 = crypto
+  const md5 = crypto
     .createHash('md5')
     .update(this.get('email'))
     .digest('hex');
@@ -67,6 +67,6 @@ userSchema.options.toJSON = {
   }
 };
 
-var User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
