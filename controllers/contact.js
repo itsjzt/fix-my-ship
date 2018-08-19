@@ -34,14 +34,16 @@ exports.contactPost = function(req, res) {
   }
 
   var mailOptions = {
-    from: req.body.name + ' ' + '<'+ req.body.email + '>',
+    from: req.body.name + ' ' + '<' + req.body.email + '>',
     to: 'your@email.com',
     subject: '✔ Contact Form | Mega Boilerplate',
     text: req.body.message
   };
 
   transporter.sendMail(mailOptions, function(err) {
-    req.flash('success', { msg: 'Thank you! Your feedback has been submitted.' });
+    req.flash('success', {
+      msg: 'Thank you! Your feedback has been submitted.'
+    });
     res.redirect('/contact');
   });
 };

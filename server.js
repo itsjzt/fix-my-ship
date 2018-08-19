@@ -24,14 +24,15 @@ require('./config/passport');
 
 var app = express();
 
-
 mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {
-  console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
+  console.log(
+    'MongoDB Connection Error. Please make sure that MongoDB is running.'
+  );
   process.exit(1);
 });
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
@@ -39,7 +40,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+  })
+);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -52,9 +59,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', HomeController.index);
 app.get('/contact', contactController.contactGet);
 app.post('/contact', contactController.contactPost);
-app.get('/account', userController.ensureAuthenticated, userController.accountGet);
-app.put('/account', userController.ensureAuthenticated, userController.accountPut);
-app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
+app.get(
+  '/account',
+  userController.ensureAuthenticated,
+  userController.accountGet
+);
+app.put(
+  '/account',
+  userController.ensureAuthenticated,
+  userController.accountPut
+);
+app.delete(
+  '/account',
+  userController.ensureAuthenticated,
+  userController.accountDelete
+);
 app.get('/signup', userController.signupGet);
 app.post('/signup', userController.signupPost);
 app.get('/login', userController.loginGet);
@@ -64,15 +83,52 @@ app.post('/forgot', userController.forgotPost);
 app.get('/reset/:token', userController.resetGet);
 app.post('/reset/:token', userController.resetPost);
 app.get('/logout', userController.logout);
-app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
-app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
-app.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
+app.get(
+  '/unlink/:provider',
+  userController.ensureAuthenticated,
+  userController.unlink
+);
+app.get(
+  '/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'user_location'] })
+);
+app.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  })
+);
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: 'profile email' })
+);
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  })
+);
 app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
-app.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email profile repo' ] }));
-app.get('/auth/github/callback', passport.authenticate('github', { successRedirect: '/', failureRedirect: '/login' }));
+app.get(
+  '/auth/twitter/callback',
+  passport.authenticate('twitter', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  })
+);
+app.get(
+  '/auth/github',
+  passport.authenticate('github', { scope: ['user:email profile repo'] })
+);
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  })
+);
 
 // Production error handler
 if (app.get('env') === 'production') {
