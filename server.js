@@ -10,6 +10,7 @@ const expressValidator = require('express-validator');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const chalk = require('chalk');
 
 // Load environment variables from .env file
 dotenv.load();
@@ -30,7 +31,9 @@ mongoose.connect(
 );
 mongoose.connection.on('error', function() {
   console.log(
-    'MongoDB Connection Error. Please make sure that MongoDB is running.'
+    chalk.red(
+      'MongoDB Connection Error. Please make sure that MongoDB is running.'
+    )
   );
   process.exit(1);
 });
@@ -142,7 +145,9 @@ if (app.get('env') === 'production') {
 }
 
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log(
+    chalk.green('Express server listening on port ' + app.get('port'))
+  );
 });
 
 module.exports = app;

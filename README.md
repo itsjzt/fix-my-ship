@@ -1,6 +1,6 @@
 # Repair My 'Ship
 
-**The Idea:** This is short for â€œRepair My Relationshipâ€. It is a forum where users can post about their relationship issues, and others can chime in with advice on how to fix their problems.
+**The Idea:** This is short for Repair My Relationship. It is a forum where users can post about their relationship issues, and others can chime in with advice on how to fix their problems.
 
 If you have experienced the fine communities on sites like 4chan, Reddit or Bodybuilding.com, then you know that there are plenty of people willing to donate a few minutes of time to help out.
 
