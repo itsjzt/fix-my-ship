@@ -16,13 +16,19 @@ block content
           div= info.msg
 
     .container
-      each i in [1, 2, 3]
+      .row 
+        .col-md-10.col-sm-2
+        a.text-uppercase(href="/addPost")
+          span.glyphicon.glyphicon-plus
+          |  <b> Add new Post</b> 
+
+      each post in posts
         .row
           .col-md-2
           .col-md-8
             .panel
               .panel-body
-                h3 Heading
-                p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                a.btn.btn-default(href='#', role='button') View details
+                h3 #{post.heading}
+                p #{post.body}
+                a.btn.btn-default(href=`/post/${post.slug}`, role='button') View details
       

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "My app description",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "mocha"
   },
   "dependencies": {
@@ -21,13 +21,15 @@
     "mongoose": "^4.4.8",
     "morgan": "^1.7.0",
     "nodemailer": "^2.3.0",
+    "nodemon": "^1.18.3",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "slug": "^0.9.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -36,7 +38,12 @@
     "sinon-chai": "^2.8.0",
     "supertest": "^3.1.0"
   },
+  "repository": {
+    "type": "master",
+    "url": "https://github.com/itsjzt/fix-my-ship"
+  },
+  "license": "MIT",
   "engines": {
-    "node": "6.1.0"
+    "node": "7.6.0"
   }
 }

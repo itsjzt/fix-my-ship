@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const slug = require('slug');
+
 const schemaOptions = {
   timestamps: true,
   toJSON: { virtuals: true },
@@ -22,19 +25,37 @@ const PostSchema = new mongoose.Schema(
       required: 'There must be a author'
     },
     tags: [{ type: String, trim: true }],
-    body: { type: String, required: true, trim: true },
+    body: { type: String, required: 'Body of post needed!', trim: true },
     comments: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }],
-    votes: { type: Number, default: 0 }
+    upvotes: { type: Number, default: 0 },
+    downvotes: { type: Number, default: 0 }
   },
   schemaOptions
 );
 
-Schema.pre('findOne', autoPopulateComments);
-Schema.pre('find', autoPopulateComments);
+PostSchema.pre('findOne', autoPopulateComments);
+PostSchema.pre('find', autoPopulateComments);
+
+// generate slug before save
+PostSchema.pre('validate', function(next) {
+  if (!this.slug) {
+    this.slugify();
+  }
+
+  next();
+});
+
+PostSchema.methods.slugify = function() {
+  this.slug =
+    slug(this.title) +
+    '-' +
+    ((Math.random() * Math.pow(36, 6)) | 0).toString(36);
+};
 
 function autoPopulateComments(next) {
   this.populate('comments').populate('author');
   next();
 }
 
-module.export = mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Post', PostSchema);
+module.exports = Post;

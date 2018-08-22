@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  .container
+    .content
+      .row 
+        .col-md-2
+        .col-md-8
+          h1.post-heading #{post.heading}
+          i.text-small #{post.author.name}
+          p.post-body #{post.body}
+

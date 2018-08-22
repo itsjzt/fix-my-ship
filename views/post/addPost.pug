@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  .container
+    .panel
+      .panel-body
+        if messages.error
+          .alert.alert-danger(role='alert')
+            for error in messages.error
+              div= error.msg
+
+        form(method='POST' action='/addNewPost')
+          legend Add Post
+          .form-group
+            label.control-label(for='heading') Heading
+            input.form-control(type='text', name='title', id='heading', placeholder='Heading...', autofocus=true)
+          .form-group
+            label.control-label(for='post-body') Post
+            textarea.form-control(id='post-body', name="body", placeholder='Post...')
+          button.btn.btn-success(type='submit') Submit
+  script.
+    /* Resize textarea's height according to the content inside */
+    var textarea = null;
+      window.addEventListener("load", function() {
+          textarea = window.document.querySelector("textarea");
+          textarea.addEventListener("keypress", function() {
+              if(textarea.scrollTop != 0){
+                  textarea.style.height = textarea.scrollHeight + "px";
+              }
+          }, false);
+      }, false);
