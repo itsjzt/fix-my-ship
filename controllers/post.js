@@ -8,7 +8,7 @@ exports.addPostGet = (req, res) => {
 exports.addNewPost = async (req, res) => {
   const postData = { ...req.body, author: req.user };
   const post = await new Post(postData).save();
-  res.json(post);
+  res.redirect(`/post/${post.slug}`);
 };
 
 exports.viewAllPosts = async (req, res) => {
