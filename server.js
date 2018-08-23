@@ -4,7 +4,7 @@ const logger = require('morgan');
 const compression = require('compression');
 const methodOverride = require('method-override');
 const session = require('express-session');
-const flash = require('express-flash');
+const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const dotenv = require('dotenv');
@@ -55,8 +55,11 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) {
-  res.locals.user = req.user;
+// pass variables to our templates + all requests
+app.use((req, res, next) => {
+  res.locals.flashes = req.flash();
+  res.locals.user = req.user || null;
+  res.locals.currentPath = req.path;
   next();
 });
 app.use(express.static(path.join(__dirname, 'public')));

@@ -11,4 +11,5 @@ block content
             img.author-img(src=`${post.author.gravatar}` alt=`${post.author.name}'s pic`)
             |  #{post.author.name}
           p.post-body #{post.body}
-
+          hr.hr-title
+          a.btn.btn-danger(href=`/post/${post.slug}/delete`) Delete Post

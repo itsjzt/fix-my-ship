@@ -9,6 +9,13 @@ html
     link(rel='stylesheet', href='/css/main.css')
   body
     include includes/header
+     if locals.flashes
+        - const categories = Object.keys(locals.flashes)
+        each category in categories
+          each message in flashes[category]
+            .alert(class=`alert-${category}`)
+              p != message
+              button.flash__remove(onClick="this.parentElement.remove()") &times;
     block content
     include includes/footer
 

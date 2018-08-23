@@ -4,15 +4,6 @@ block content
   .container
     .panel
       .panel-body
-        if messages.success
-          .alert.alert-success(role='alert')
-            for success in messages.success
-              div= success.msg
-        if messages.error
-          .alert.alert-danger(role='alert')
-            for error in messages.error
-              div= error.msg
-
         form.form-horizontal(method='POST', action='/account?_method=PUT')
           legend Profile Information
           .form-group

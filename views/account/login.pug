@@ -4,11 +4,6 @@ block content
   .login-container.container
     .panel
       .panel-body
-        if messages.error
-          .alert.alert-danger(role='alert')
-            for error in messages.error
-              div= error.msg
-
         form(method='POST')
           legend Log In
           .form-group
