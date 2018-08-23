@@ -23,7 +23,23 @@ exports.viewPost = async (req, res) => {
 };
 
 exports.deletePost = async (req, res) => {
-  const post = await Post.findOneAndRemove({ slug: req.params.slug });
+  await Post.findOneAndRemove({ slug: req.params.slug });
   req.flash('danger', '<strong>Danger</strong> Your Post is deleted now!');
   res.redirect('/');
+};
+
+exports.updateRequest = async (req, res) => {
+  const post = await Post.findOne({ slug: req.params.slug });
+  res.render('post/updatePost', { title: 'Update Post', post });
+};
+
+exports.updatePost = async (req, res) => {
+  const [slug, body] = [req.params.slug, req.body];
+  const post = await Post.findOneAndUpdate(
+    { slug },
+    { $set: body },
+    { new: true, runValidators: true }
+  );
+  req.flash('info', 'Your post got updated!');
+  res.redirect(`/post/${post.slug}`);
 };

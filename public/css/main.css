@@ -325,3 +325,8 @@ textarea {
   height: auto;
   border-radius: 50%;
 }
+
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+}

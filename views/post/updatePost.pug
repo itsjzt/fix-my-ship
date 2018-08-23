@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .container
+    .panel
+      .panel-body
+        form(method='POST' action=`/post/${post.slug}/update`)
+          legend Update Post
+          .form-group
+            label.control-label(for='title') Title
+            input.form-control(type='text', name='title', id='title', placeholder='Title...', value=`${post.title}` autofocus=true)
+          .form-group
+            label.control-label(for='post-body') Post
+            textarea.form-control(id='post-body', name="body", placeholder='Post...') #{post.body}
+          button.btn.btn-success(type='submit') Submit
+  script.
+    /* Resize textarea's height according to the content inside */
+    var textarea = null;
+      window.addEventListener("load", function() {
+          textarea = window.document.querySelector("textarea");
+          textarea.addEventListener("keypress", function() {
+              if(textarea.scrollTop != 0){
+                  textarea.style.height = textarea.scrollHeight + "px";
+              }
+          }, false);
+      }, false);

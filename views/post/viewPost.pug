@@ -12,4 +12,10 @@ block content
             |  #{post.author.name}
           p.post-body #{post.body}
           hr.hr-title
-          a.btn.btn-danger(href=`/post/${post.slug}/delete`) Delete Post
+          .post-actions
+            a.text-uppercase(href=`/post/${post.slug}/delete`) 
+              span.glyphicon.glyphicon-trash &nbsp;
+              b Delete 
+            a.text-uppercase(href=`/post/${post.slug}/update`) 
+              span.glyphicon.glyphicon-edit &nbsp;
+              b Update
