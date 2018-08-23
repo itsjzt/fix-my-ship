@@ -6,9 +6,9 @@ block content
       .row 
         .col-md-2
         .col-md-8
-          h1.post-heading #{post.heading}
-          i 
+          h1.post-heading #{post.title}
+          a(href=`/user/${post.author._id}`)
             img.author-img(src=`${post.author.gravatar}` alt=`${post.author.name}'s pic`)
-          |  #{post.author.name}
+            |  #{post.author.name}
           p.post-body #{post.body}
 
