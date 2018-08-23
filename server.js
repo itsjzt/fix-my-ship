@@ -13,6 +13,9 @@ const passport = require('passport');
 const chalk = require('chalk');
 const indexRouter = require('./router/index');
 
+// use native promises
+mongoose.Promise = global.Promise;
+
 // Load environment variables from .env file
 dotenv.load();
 
@@ -71,7 +74,7 @@ if (app.get('env') === 'production') {
 
 app.listen(app.get('port'), function() {
   console.log(
-    chalk.green('Express server listening on port ' + app.get('port'))
+    chalk.blue('Express server listening on port ' + app.get('port'))
   );
 });
 
