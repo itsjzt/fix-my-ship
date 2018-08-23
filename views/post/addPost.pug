@@ -12,8 +12,8 @@ block content
         form(method='POST' action='/addNewPost')
           legend Add Post
           .form-group
-            label.control-label(for='heading') Heading
-            input.form-control(type='text', name='title', id='heading', placeholder='Heading...', autofocus=true)
+            label.control-label(for='title') Title
+            input.form-control(type='text', name='title', id='title', placeholder='Title...', autofocus=true)
           .form-group
             label.control-label(for='post-body') Post
             textarea.form-control(id='post-body', name="body", placeholder='Post...')
