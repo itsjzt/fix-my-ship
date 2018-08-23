@@ -16,6 +16,8 @@ block content
             .panel
               .panel-body
                 h3 #{post.title}
-                p #{post.body}
-                a.btn.btn-default(href=`/post/${post.slug}`, role='button') View Post ➡
-      
+                //- first 30 words
+                - const description = post.body.split(' ').slice(0, 21).join(' ')
+                p #{description}...
+                a.btn(href=`/post/${post.slug}`, role='button') View &nbsp;
+                  span.glyphicon.glyphicon-arrow-right 
