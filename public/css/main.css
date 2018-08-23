@@ -306,3 +306,18 @@ textarea {
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+
+/* Post view */
+
+.post-view {
+  max-width: 860px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 -1px 4px rgba(151, 159, 175, 0.2);
+}
+
+.author-img {
+  width: 2em;
+  height: auto;
+  border-radius: 50%;
+}
