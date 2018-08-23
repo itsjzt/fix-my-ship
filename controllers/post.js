@@ -21,3 +21,9 @@ exports.viewPost = async (req, res) => {
   const post = await Post.findOne({ slug });
   res.render('post/viewPost', { title: post.title, post });
 };
+
+exports.deletePost = async (req, res) => {
+  const post = await Post.findOneAndRemove({ slug: req.params.slug });
+  req.flash('danger', '<strong>Danger</strong> Your Post is deleted now!');
+  res.redirect('/');
+};

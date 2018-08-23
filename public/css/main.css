@@ -313,12 +313,15 @@ textarea {
   max-width: 860px;
   background: #fff;
   margin-bottom: 32px;
+  padding-bottom: 32px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08),
     inset 0 -1px 4px rgba(151, 159, 175, 0.2);
 }
 
 .author-img {
   width: 2em;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   height: auto;
   border-radius: 50%;
 }

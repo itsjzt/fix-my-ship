@@ -8,14 +8,15 @@ html
     link(rel='stylesheet', href='/css/vendor/bootstrap.css')
     link(rel='stylesheet', href='/css/main.css')
   body
-    include includes/header
-     if locals.flashes
+    include includes/header 
+    .container
+      if locals.flashes
         - const categories = Object.keys(locals.flashes)
         each category in categories
           each message in flashes[category]
-            .alert(class=`alert-${category}`)
-              p != message
-              button.flash__remove(onClick="this.parentElement.remove()") &times;
+            .alert(class=`fade in alert-dismissible alert-${category}`)
+              a(href="#" class="close" data-dismiss="alert" aria-label="close") &times; 
+              p  !{message}
     block content
     include includes/footer
 

@@ -85,5 +85,6 @@ router.get(
 router.get('/addPost', PostController.addPostGet);
 router.post('/addNewPost', catchErrors(PostController.addNewPost));
 router.get('/post/:slug', catchErrors(PostController.viewPost));
+router.get('/post/:slug/delete', catchErrors(PostController.deletePost));
 
 module.exports = router;
