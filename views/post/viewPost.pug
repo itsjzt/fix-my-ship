@@ -25,7 +25,7 @@ block content
         .col-md-2
         .col-md-8
           h3 Comments 
-          form(action="/${post.slug}/comment/add" method="POST")
+          form(action=`/comment/${post._id}/add` method="POST")
             .form-group
               label.sr-only(for="comment-body") Add Your Comment
               textarea.form-control#comment-body(name="body" placeholder="This is an awesome post...")

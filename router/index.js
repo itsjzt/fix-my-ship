@@ -7,6 +7,7 @@ const { catchErrors } = require('../helper');
 const userController = require('../controllers/user');
 const contactController = require('../controllers/contact');
 const PostController = require('../controllers/Post');
+const commentController = require('../controllers/comment');
 
 router.get('/', catchErrors(PostController.viewAllPosts));
 router.get('/contact', contactController.contactGet);
@@ -82,15 +83,16 @@ router.get(
   })
 );
 
-// Post routes  
+// Post   
 router.get('/addPost', PostController.addPostGet);
-router.post('/addNewPost', catchErrors(PostController.addNewPost));
+router.post('/addNewPost', userController.ensureAuthenticated, catchErrors(PostController.addNewPost));
 router.get('/post/:slug', catchErrors(PostController.viewPost));
-router.get('/post/:slug/delete', catchErrors(PostController.deletePost));
-router.get('/post/:slug/update', catchErrors(PostController.updateRequest));
-router.post('/post/:slug/update', catchErrors(PostController.updatePost));
+router.get('/post/:slug/delete', userController.ensureAuthenticated, catchErrors(PostController.deletePost));
+router.get('/post/:slug/update', userController.ensureAuthenticated, catchErrors(PostController.updateRequest));
+router.post('/post/:slug/update', userController.ensureAuthenticated, catchErrors(PostController.updatePost));
 
-router.post('/post/:slug/comment/add', userController.ensureAuthenticated)
-router.get('/post/:slug/comment/delete', userController.ensureAuthenticated)
+// Comment 
+router.post('/comment/:id/add', userController.ensureAuthenticated, commentController.addComment)
+router.get('comment/:id/delete', userController.ensureAuthenticated, commentController.deleteComment)
 
 module.exports = router;

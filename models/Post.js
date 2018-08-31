@@ -26,7 +26,6 @@ const PostSchema = new mongoose.Schema(
     },
     tags: [{ type: String, trim: true }],
     body: { type: String, required: 'Body of post needed!', trim: true },
-    comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
     upvotes: { type: Number, default: 0 },
     downvotes: { type: Number, default: 0 }
   },
@@ -56,6 +55,12 @@ function autoPopulateComments(next) {
   this.populate('comments').populate('author');
   next();
 }
+
+PostSchema.virtual('comments', {
+  ref: 'Comment',         // what model to link
+  localField: '_id',     // which field on the post
+  foreignField: 'post' // which field on the comment
+})
 
 const Post = mongoose.model('Post', PostSchema);
 module.exports = Post;

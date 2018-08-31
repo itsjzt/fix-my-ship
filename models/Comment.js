@@ -6,15 +6,20 @@ const CommentSchema = mongoose.Schema({
     required: 'There must be a comment',
     trim: true,
   },
+  post: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Post',
+    required: 'There must be a Post!'
+  },
   author: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: 'There must be a author'
+    required: 'There must be a author!'
   },
-  comments: [{
-    type: mongoose.Schema.ObjectId,
-    ref: 'Comment'
-  }],
+  // comments: [{
+  //   type: mongoose.Schema.ObjectId,
+  //   ref: 'Comment'
+  // }],
   upvotes: { type: Number, default: 0 },
   downvotes: { type: Number, default: 0 }
 }, { timestamp: true })
