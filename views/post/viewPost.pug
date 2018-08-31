@@ -30,8 +30,14 @@ block content
               label.sr-only(for="comment-body") Add Your Comment
               textarea.form-control#comment-body(name="body" placeholder="This is an awesome post...")
               input.btn.btn-default(type="submit" value="Submit")
-          each comment in post.comments
-            .panel
-              .panel-body
-                span(class="comment-author") #{comment.author.name}
-                p #{comment.body}
+          if post.comments
+            each comment in post.comments
+              .panel
+                .panel-body
+                  .comment-info
+                    span.comment-author
+                      img.img-responsive.img-circle.inline(src=comment.author.gravatar alt="author pic" width="30") 
+                      | &nbsp;
+                      b #{comment.author.name}
+                    span.comment-time(datetime=comment.created) #{moment(comment.createdAt).fromNow()}
+                  p #{comment.body}
