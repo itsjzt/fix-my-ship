@@ -28,7 +28,7 @@ mongoose.connect(
   process.env.MONGODB,
   { useMongoClient: true }
 );
-mongoose.connection.on('error', function() {
+mongoose.connection.on('error', function () {
   console.log(
     chalk.red(
       'MongoDB Connection Error. Please make sure that MongoDB is running.'
@@ -64,18 +64,23 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.join(__dirname, 'public')));
 
+// import and show all schema here
+require('./models/Comment')
+require('./models/User')
+require('./models/Post')
+
 // Routers here
 app.use(indexRouter);
 
 // Production error handler
 if (app.get('env') === 'production') {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.sendStatus(err.status || 500);
   });
 }
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
   console.log(
     chalk.blue('Express server listening on port ' + app.get('port'))
   );

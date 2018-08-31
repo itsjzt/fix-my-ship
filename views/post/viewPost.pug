@@ -19,3 +19,19 @@ block content
             a.text-uppercase(href=`/post/${post.slug}/update`) 
               span.glyphicon.glyphicon-edit &nbsp;
               b Update
+        
+    .comment-view
+      .row 
+        .col-md-2
+        .col-md-8
+          h3 Comments 
+          form(action="/${post.slug}/comment/add" method="POST")
+            .form-group
+              label.sr-only(for="comment-body") Add Your Comment
+              textarea.form-control#comment-body(name="body" placeholder="This is an awesome post...")
+              input.btn.btn-default(type="submit" value="Submit")
+          each comment in post.comments
+            .panel
+              .panel-body
+                span(class="comment-author") #{comment.author.name}
+                p #{comment.body}
