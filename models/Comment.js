@@ -23,8 +23,7 @@ const CommentSchema = mongoose.Schema(
         ref: 'Comment'
       }
     ],
-    upvotes: { type: Number, default: 0 },
-    downvotes: { type: Number, default: 0 }
+    upvotes: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
   },
   { timestamp: true }
 );

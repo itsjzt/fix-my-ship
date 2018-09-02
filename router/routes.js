@@ -110,6 +110,18 @@ router.post(
   catchErrors(PostController.updatePost)
 );
 
+router.get(
+  '/post/:slug/upvote',
+  userController.ensureAuthenticated,
+  catchErrors(PostController.upvote)
+);
+
+router.get(
+  '/post/:slug/downvote',
+  userController.ensureAuthenticated,
+  catchErrors(PostController.downvote)
+);
+
 // Comment
 router.post(
   '/comment/:id/add',

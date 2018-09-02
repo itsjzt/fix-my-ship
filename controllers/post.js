@@ -44,6 +44,26 @@ exports.updatePost = async (req, res) => {
   res.redirect(`/post/${post.slug}`);
 };
 
+exports.upvote = async (req, res) => {
+  const { slug } = req.params;
+  const userId = req.user._id;
+  await Post.findOneAndUpdate(slug, {
+    $push: { upvotes: userId }
+  });
+  req.flash('success', 'Upvoted Post');
+  res.redirect('back');
+};
+
+exports.downvote = async (req, res) => {
+  const { slug } = req.params;
+  const userId = req.user._id;
+  await Post.findOneAndUpdate(slug, {
+    $pull: { upvotes: userId }
+  });
+  req.flash('warning', 'Downvoted Post');
+  res.redirect('back');
+};
+
 /**
  *  ensure the person is author of the post else redirect
  * @param req.params.slug Post slug

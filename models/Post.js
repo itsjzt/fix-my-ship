@@ -26,8 +26,7 @@ const PostSchema = new mongoose.Schema(
     },
     tags: [{ type: String, trim: true }],
     body: { type: String, required: 'Body of post needed!', trim: true },
-    upvotes: { type: Number, default: 0 },
-    downvotes: { type: Number, default: 0 }
+    upvotes: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
   },
   schemaOptions
 );
@@ -36,7 +35,7 @@ PostSchema.pre('findOne', autoPopulateComments);
 PostSchema.pre('find', autoPopulateComments);
 
 // generate slug before save
-PostSchema.pre('validate', function (next) {
+PostSchema.pre('validate', function(next) {
   if (!this.slug) {
     this.slugify();
   }
@@ -44,7 +43,7 @@ PostSchema.pre('validate', function (next) {
   next();
 });
 
-PostSchema.methods.slugify = function () {
+PostSchema.methods.slugify = function() {
   this.slug =
     slug(this.title) +
     '-' +
@@ -57,10 +56,10 @@ function autoPopulateComments(next) {
 }
 
 PostSchema.virtual('comments', {
-  ref: 'Comment',         // what model to link
-  localField: '_id',     // which field on the post
+  ref: 'Comment', // what model to link
+  localField: '_id', // which field on the post
   foreignField: 'post' // which field on the comment
-})
+});
 
 const Post = mongoose.model('Post', PostSchema);
 module.exports = Post;
