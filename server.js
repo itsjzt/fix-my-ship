@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const chalk = require('chalk');
 const moment = require('moment');
-const indexRouter = require('./router/index');
+const indexRouter = require('./router/routes');
 
 // use native promises
 mongoose.Promise = global.Promise;
