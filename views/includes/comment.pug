@@ -1,0 +1,25 @@
+.comment-view
+  .row 
+    .col-md-2
+    .col-md-8
+      h3 Comments 
+      form(action=`/comment/${post._id}/add` method="POST")
+        .form-group
+          label.sr-only(for="comment-body") Add Your Comment
+          textarea.form-control#comment-body(name="body" placeholder="This is an awesome post...")
+          input.btn.btn-default(type="submit" value="Submit")
+      if post.comments
+        each comment in post.comments
+          .panel
+            .panel-body
+              .comment-info
+                span.comment-author
+                  img.img-responsive.img-circle.inline(src=comment.author.gravatar alt="author pic" width="30") 
+                  | &nbsp;
+                  b #{comment.author.name}
+                span.comment-time(datetime=comment.created) #{moment(comment.createdAt).fromNow()}
+                if comment.author._id.toString() === (user && user._id.toString())
+                  span.post-actions
+                    a.text-uppercase(href=`/comment/${post._id}/delete`) 
+                      span.glyphicon.glyphicon-trash &nbsp;
+              p #{comment.body}
