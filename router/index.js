@@ -117,7 +117,7 @@ router.post(
   commentController.addComment
 );
 router.get(
-  'comment/:id/delete',
+  '/comment/:commentid/delete',
   userController.ensureAuthenticated,
   commentController.deleteComment
 );

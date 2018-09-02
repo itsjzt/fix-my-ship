@@ -20,6 +20,6 @@
                 span.comment-time(datetime=comment.created) #{moment(comment.createdAt).fromNow()}
                 if comment.author._id.toString() === (user && user._id.toString())
                   span.post-actions
-                    a.text-uppercase(href=`/comment/${post._id}/delete`) 
+                    a.text-uppercase(href=`/comment/${comment._id}/delete`) 
                       span.glyphicon.glyphicon-trash &nbsp;
               p #{comment.body}
