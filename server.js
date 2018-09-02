@@ -59,9 +59,13 @@ app.use(passport.session());
 // pass variables to our templates + all requests
 app.use((req, res, next) => {
   res.locals.flashes = req.flash();
-  res.locals.moment = moment;
   res.locals.user = req.user || null;
-  res.locals.currentPath = req.path;
+  res.locals.moment = moment;
+
+  res.locals.helper = {
+    currentPath: req.path,
+    dump: json => JSON.stringify(json, null, 2)
+  };
   next();
 });
 app.use(express.static(path.join(__dirname, 'public')));

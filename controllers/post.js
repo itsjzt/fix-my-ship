@@ -43,3 +43,19 @@ exports.updatePost = async (req, res) => {
   req.flash('info', 'Your post got updated!');
   res.redirect(`/post/${post.slug}`);
 };
+
+/**
+ *  ensure the person is author of the post else redirect
+ * @param req.params.slug Post slug
+ */
+
+exports.ensureAuthorBySlug = async (req, res, next) => {
+  const { slug } = req.params;
+  const post = await Post.findOne({ slug });
+  if (post.author._id.equals(req.user._id)) {
+    next();
+    return;
+  }
+  req.flash('danger', 'You are not author of this post!');
+  res.redirect('back');
+};

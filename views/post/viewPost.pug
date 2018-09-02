@@ -9,16 +9,17 @@ block content
           h1.post-heading #{post.title}
           span.author-info
             img.author-img(src=`${post.author.gravatar}` alt=`${post.author.name}'s pic`)
-            |  #{post.author.name}
+            b #{post.author.name}
           p.post-body #{post.body}
           hr.hr-title
-          .post-actions
-            a.text-uppercase(href=`/post/${post.slug}/delete`) 
-              span.glyphicon.glyphicon-trash &nbsp;
-              b Delete 
-            a.text-uppercase(href=`/post/${post.slug}/update`) 
-              span.glyphicon.glyphicon-edit &nbsp;
-              b Update
+          if post.author._id.toString() === (user && user._id.toString())
+            .post-actions
+              a.text-uppercase(href=`/post/${post.slug}/delete`) 
+                span.glyphicon.glyphicon-trash &nbsp;
+                b Delete 
+              a.text-uppercase(href=`/post/${post.slug}/update`) 
+                span.glyphicon.glyphicon-edit &nbsp;
+                b Update
         
     .comment-view
       .row 
