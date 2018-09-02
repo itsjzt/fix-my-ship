@@ -134,4 +134,16 @@ router.get(
   commentController.deleteComment
 );
 
+router.get(
+  '/comment/:id/upvote',
+  userController.ensureAuthenticated,
+  catchErrors(commentController.upvote)
+);
+
+router.get(
+  '/comment/:id/downvote',
+  userController.ensureAuthenticated,
+  catchErrors(commentController.downvote)
+);
+
 module.exports = router;
