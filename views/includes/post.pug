@@ -9,7 +9,6 @@
             b #{post.author.name}
           p.post-body #{post.body}
           hr.hr-title
-          if post.author._id.toString() === (user && user._id.toString())
             .post-actions
               if post.upvotes.includes(user && user._id.toString())
                 a.text-uppercase(href=`/post/${post.slug}/upvote`) 
@@ -19,10 +18,11 @@
                 a.text-uppercase(href=`/post/${post.slug}/downvote`) 
                   span.glyphicon.glyphicon-chevron-down &nbsp;
                   b Downvote
-              a.text-uppercase(href=`/post/${post.slug}/delete`) 
-                span.glyphicon.glyphicon-trash &nbsp;
-                b Delete 
-              a.text-uppercase(href=`/post/${post.slug}/update`) 
-                span.glyphicon.glyphicon-edit &nbsp;
-                b Update
+              if post.author._id.toString() === (user && user._id.toString())
+                a.text-uppercase(href=`/post/${post.slug}/delete`) 
+                  span.glyphicon.glyphicon-trash &nbsp;
+                  b Delete 
+                a.text-uppercase(href=`/post/${post.slug}/update`) 
+                  span.glyphicon.glyphicon-edit &nbsp;
+                  b Update
         
