@@ -9,8 +9,7 @@ const PostController = require('../controllers/Post');
 const commentController = require('../controllers/comment');
 
 router.get('/', catchErrors(PostController.viewAllPosts));
-router.get('/contact', contactController.contactGet);
-router.post('/contact', contactController.contactPost);
+
 router.get(
   '/account',
   userController.ensureAuthenticated,
