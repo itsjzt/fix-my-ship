@@ -9,20 +9,23 @@
             b #{post.author.name}
           p.post-body #{post.body}
           hr.hr-title
-            .post-actions
-              if post.upvotes.includes(user && user._id.toString())
-                a.text-uppercase(href=`/post/${post.slug}/upvote`) 
-                  span.glyphicon.glyphicon-chevron-up &nbsp;
-                  b Upvote 
-              else 
-                a.text-uppercase(href=`/post/${post.slug}/downvote`) 
-                  span.glyphicon.glyphicon-chevron-down &nbsp;
-                  b Downvote
-              if post.author._id.toString() === (user && user._id.toString())
-                a.text-uppercase(href=`/post/${post.slug}/delete`) 
-                  span.glyphicon.glyphicon-trash &nbsp;
-                  b Delete 
-                a.text-uppercase(href=`/post/${post.slug}/update`) 
-                  span.glyphicon.glyphicon-edit &nbsp;
-                  b Update
+          .post-actions
+            - const upvoteString = post.upvotes.map(store => store.toString())
+            - const isUpvoted = upvoteString.includes(user && user._id.toString())
+            if isUpvoted
+              a.text-uppercase(href=`/post/${post.slug}/downvote`) 
+                span.glyphicon.glyphicon-chevron-down &nbsp;
+                b Downvote
+            else 
+              a.text-uppercase(href=`/post/${post.slug}/upvote`) 
+                span.glyphicon.glyphicon-chevron-up &nbsp;
+                b Upvote 
+            - const isAuthor = post.author._id.toString() === (user && user._id.toString())
+            if isAuthor
+              a.text-uppercase(href=`/post/${post.slug}/delete`) 
+                span.glyphicon.glyphicon-trash &nbsp;
+                b Delete 
+              a.text-uppercase(href=`/post/${post.slug}/update`) 
+                span.glyphicon.glyphicon-edit &nbsp;
+                b Update
         
