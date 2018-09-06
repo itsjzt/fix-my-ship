@@ -23,3 +23,14 @@
                     a.text-uppercase(href=`/comment/${comment._id}/delete`) 
                       span.glyphicon.glyphicon-trash &nbsp;
               p #{comment.body}
+              .comment-actions
+                - const upvoteString = comment.upvotes.map(id => id.toString())
+                - const isUpvoted = upvoteString.includes(user && user._id.toString())
+                if isUpvoted
+                  a.text-uppercase(href=`/comment/${comment._id}/downvote`) 
+                    span.glyphicon.glyphicon-chevron-down &nbsp;
+                    b Downvote
+                else 
+                  a.text-uppercase(href=`/comment/${comment._id}/upvote`) 
+                    span.glyphicon.glyphicon-chevron-up &nbsp;
+                    b Upvote 
