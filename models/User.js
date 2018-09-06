@@ -18,11 +18,7 @@ const userSchema = new mongoose.Schema(
     passwordResetExpires: Date,
     gender: String,
     location: String,
-    picture: String,
-    facebook: String,
-    twitter: String,
-    google: String,
-    github: String
+    picture: String
   },
   schemaOptions
 );

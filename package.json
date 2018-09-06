@@ -24,21 +24,10 @@
     "nodemailer": "^2.3.0",
     "nodemon": "^1.18.3",
     "passport": "^0.3.2",
-    "passport-facebook": "^2.1.0",
-    "passport-github": "^1.1.0",
-    "passport-google-oauth": "^1.0.0",
-    "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4",
     "pug": "^2.0.3",
     "slug": "^0.9.1"
   },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^5.2.0",
-    "sinon": "^1.17.3",
-    "sinon-chai": "^2.8.0",
-    "supertest": "^3.1.0"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "master",
     "url": "https://github.com/itsjzt/fix-my-ship"
